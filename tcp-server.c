@@ -42,6 +42,12 @@ int main() {
       break;
     }
 
+    printf(
+      "accepted connection from %d, port=%d\n",
+      inet_ntoa(client.sin_addr),
+      ntohs(client.sin_port)
+    );
+
     /* 5文字送信 */
     n = write(sock, "HELLO", 5);
     if (n < 1) {
