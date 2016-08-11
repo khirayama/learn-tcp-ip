@@ -10,6 +10,7 @@ int main() {
   int len;
   int sock;
   int n;
+  int yes = 1;
 
   /* ソケットの作成 */
   sock0 = socket(AF_INET, SOCK_STREAM, 0);
@@ -22,6 +23,15 @@ int main() {
   addr.sin_family = AF_INET;
   addr.sin_port = htons(12345);
   addr.sin_addr.s_addr = INADDR_ANY;
+
+  setsockopt(
+    sock0,
+    SOL_SOCKET,
+    SO_REUSEADDR,
+    (const char *)&yes,
+    sizeof(yes)
+  );
+
   if (bind(sock0, (struct sockaddr *)&addr, sizeof(addr)) != 0) {
     perror("bind");
     return 1;
